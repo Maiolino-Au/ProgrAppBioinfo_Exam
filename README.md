@@ -39,6 +39,14 @@ This is the logic
 
 # other
 other\
-some code\
-<pre>def greet(name)
-    print(f"Hello, {name}!")</pre>
+\
+python
+```python
+print("Hello, world!")
+print("Wazzha!")
+```
+R
+```R
+print("Hello, world!")
+print("Wazzha!")
+```
