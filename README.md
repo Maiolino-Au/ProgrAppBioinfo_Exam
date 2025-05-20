@@ -50,3 +50,17 @@ R
 print("Hello, world!")
 print("Wazzha!")
 ```
+
+## Docker
+I used a docker container with stuff
+
+### Dockerfile
+Build the container from 
+```Dockerfile
+FROM ubuntu
+
+CMD ["/bin/bash"]
+```
+
+### Script
+To start the container
