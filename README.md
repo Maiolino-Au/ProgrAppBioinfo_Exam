@@ -1,3 +1,3 @@
-# ProgrAppBioinfo_Exam
+# Programming Apprroaches for Bioinformatics Exam
 Maiolino Aurelio - June 2025 \
 Exam of the course Programming Apprroaches for Bioinformatics
