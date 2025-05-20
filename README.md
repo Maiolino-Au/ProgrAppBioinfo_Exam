@@ -7,7 +7,10 @@ Exam of the course Programming Approaches for Bioinformatics
 1. [Project](#project)
 2. [Logic](#logic)
 3. [other](#other)
+4. [Docker](#docker)
+[Dockerfile](#dockerfile)
 
+   
 ## Exam structure
 The exam focuses primarily on programming skills; a deep understanding of the underlying results is not required. \
 \
