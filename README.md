@@ -38,4 +38,7 @@ this is the assigned project
 This is the logic
 
 # other
-other
+other\
+some code\
+<pre>def greet(name)
+    print(f"Hello, {name}!")</pre>
