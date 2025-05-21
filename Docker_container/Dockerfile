@@ -19,13 +19,13 @@ RUN R -e "install.packages(c('BiocManager'))" \
     R -e "BiocManager::install(\"tidyverse\")"
 
 # Install custom R packages
-RUN R -e "remotes::install_github('Maiolino-Au/')"
-
-# Organize
-RUN mkdir Scripts 
+RUN R -e "remotes::install_github('Maiolino-Au/')" # abc
 
 # Download the R script from GitHub
-RUN curl -o Scripts/script.R https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/script.R
+RUN mkdir -p /Scripts && \
+    cd /Scripts && \
+    curl -O https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/Scripts/First.R # abc
 
 # 
-CMD ["/bin/bash","jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--ServerApp.root_dir=/"]
+ENV SHELL=/bin/bash
+CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.allow_origin='*' --ServerApp.token='' #last one disables the token
