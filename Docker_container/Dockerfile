@@ -25,7 +25,7 @@ RUN R -e "remotes::install_github('Maiolino-Au/')"
 RUN mkdir Scripts 
 
 # Download the R script from GitHub
-RUN curl -o Scripts/script.R https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/script.R
+RUN curl -o Scripts/script.R https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/script.R
 
 # 
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--ServerApp.root_dir=/"]
+CMD ["/bin/bash","jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--no-browser", "--allow-root", "--ServerApp.root_dir=/"]
