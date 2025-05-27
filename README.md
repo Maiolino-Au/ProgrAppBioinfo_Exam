@@ -1,7 +1,7 @@
 # Programming Approaches for Bioinformatics Exam
 Maiolino Aurelio - June 2025 \
 Exam of the course Programming Approaches for Bioinformatics 
-
+# the exam is differnt from what i thought
 ## Index
 0. [Exam structure](#exam-structure)
 1. [Project](#project)
