@@ -18,8 +18,8 @@ RUN apt-get update && apt-get install -y \
 RUN R -e "install.packages(c('BiocManager'))" \
     R -e "BiocManager::install(\"tidyverse\")"
 
-# Install custom R packages
-RUN R -e "remotes::install_github('Maiolino-Au/')" # abc
+# Install custom R package
+RUN R -e "remotes::install_github('Maiolino-Au/PABMaiolinoPackage')" # abc
 
 # Download the R script from GitHub
 RUN mkdir -p /Scripts && \
