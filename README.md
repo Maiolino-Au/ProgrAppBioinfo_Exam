@@ -95,12 +95,10 @@ other\
 python
 ```python
 print("Hello, world!")
-print("Wazzha!")
 ```
 R
 ```R
 print("Hello, world!")
-print("Wazzha!")
 ```
 
 
