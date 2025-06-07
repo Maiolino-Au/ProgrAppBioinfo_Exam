@@ -43,8 +43,8 @@ Deadline: 26/06/2025
 
 ### Part 2: Package Installation
 * Attempt to install the following R packages:
-   * Seurat (follow installation guide:https://satijalab.org/seurat/articles/install_v5.html)
-   * Signac (GitHub repository: https://github.com/stuart-lab/signac)
+   * Seurat (follow [installation guide](https://satijalab.org/seurat/articles/install_v5.html))
+   * Signac ([GitHub repository](https://github.com/stuart-lab/signac))
 * If any installation fails, in the report, provide a clear explanation of the issues encountered and why the installation was unsuccessful.
 * Possibly try to find a work around to the installation fails, if you fail at all in installing the package(s) describe the reason why it was impossible to find a work around.
 
