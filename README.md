@@ -200,6 +200,10 @@ ENV SHELL=/bin/bash
 CMD jupyter lab --ip=0.0.0.0 --port=8888 --no-browser --allow-root --ServerApp.allow_origin='*' --ServerApp.token=''
 ```
 
+### Build the Image
+```
+docker build -t maiolino_exam2025 .
+```
 
 ### Script
 To start the container use this script, either the [windods](Docker_container/script_windows_maiolino_exam2025.cmd) or [unix](Docker_container/script_unix_maiolino_exam2025.sh) version.
