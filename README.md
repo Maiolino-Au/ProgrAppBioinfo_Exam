@@ -111,36 +111,89 @@ Build the container from satijalab/seurat v5.0.0. This is an image which already
 R v4.2.0 \
 Seurat v5.0.0
 ```Dockerfile
-FROM satijalab/seurat:5.0.0
+FROM ubuntu
 ```
-Install curl: it is needed to download the automatically scripts. 
+
+Setup
 ```Dockerfile
-RUN apt-get update && apt-get install -y \
+ENV DEBIAN_FRONTEND=noninteractive
+
+LABEL maintainer="aurelio.maiolino@edu.unito.it"
+```
+
+
+Install curl: it is needed to download the automatically scripts. last step is cleaning
+```Dockerfile
+# Install stuf for ubuntu
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    software-properties-common \
+    dirmngr \
+    gpg \
     curl \
+    build-essential \
+    libcurl4-openssl-dev \
+    libssl-dev \
+    libxml2-dev \
+    libfontconfig1-dev \
+    libfreetype6-dev \
+    libpng-dev \
+    libtiff5-dev \
+    libjpeg-dev \
+    libharfbuzz-dev \
+    libfribidi-dev \
+    make \
+    cmake \
+    gfortran \
+    libxt-dev \
+    liblapack-dev \
+    libblas-dev \
+    sudo \
+    wget \
     && rm -rf /var/lib/apt/lists/*
 ```
+
+Intstall R
+```Dockerfile
+# Add the CRAN GPG key and repository for R
+RUN curl -fsSL https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | gpg --dearmor -o /usr/share/keyrings/cran.gpg \
+    && echo "deb [signed-by=/usr/share/keyrings/cran.gpg] https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/" \
+    | tee /etc/apt/sources.list.d/cran-r.list
+
+# Update again and install R
+RUN apt update && apt install -y --no-install-recommends r-base
+```
+
 Install Python, Jupyter, and make R visible by jupiter.
 ```Dockerfile
-RUN apt-get update && apt-get install -y \
-    python3-pip python3-dev curl libzmq3-dev \
-    && pip3 install --no-cache-dir jupyterlab notebook \
-    && Rscript -e "install.packages('IRkernel', repos='https://cloud.r-project.org'); IRkernel::installspec(user = FALSE)"
+# Install JupyterLab
+RUN apt update && apt install -y python3 python3-pip python3-venv \
+    python3 -m venv /opt/venv \
+    /opt/venv/bin/pip install --upgrade pip && /opt/venv/bin/pip install jupyterlab
+ENV PATH="/opt/venv/bin:$PATH"
 ```
-satijalab/seurat already has many libraries installed, but BiocManager and tidyverse are not.
+
+Install R packages
 ```Dockerfile
-RUN R -e "install.packages(c('BiocManager'))" \
-    R -e "BiocManager::install(\"tidyverse\")"
+# Install R packages
+RUN R -e "install.packages(c('BiocManager', 'dplyr', 'ggplot2', 'data.table', 'future', 'cowplot'))" 
+RUN R -e "BiocManager::install('tidyverse')" 
+RUN R -e "BiocManager::install('Seurat')"
 ```
+
 I have prepared a custom R package with all the function needed for this exam.
 ```Dockerfile
+# Install custom R packages
 RUN R -e "remotes::install_github('Maiolino-Au/PABMaiolinoPackage')"
 ```
+
 Download the scripts and put them in a dedicated folder. This folder is AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 ```Dockerfile
+# Download the R script from GitHub
 RUN mkdir -p /Scripts && \
     cd /Scripts && \
     curl -O https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/Scripts/First.R
 ```
+
 CMD
 ```Dockerfile
 ENV SHELL=/bin/bash
