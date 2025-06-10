@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM ubuntu:20.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -29,6 +29,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libblas-dev \
     sudo \
     wget \
+    zlib1g-dev \
+    libbz2-dev \
+    liblzma-dev \
+    libncurses5-dev \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -50,20 +54,20 @@ RUN python3 -m venv /opt/venv
 RUN /opt/venv/bin/pip install --upgrade pip && /opt/venv/bin/pip install jupyterlab
 # Set the virtual environment as the default Python path
 ENV PATH="/opt/venv/bin:$PATH"
+# Make R visible to jupyter
+RUN R -e "install.packages('IRkernel')" \
+    R -e "IRkernel::installspec(user = FALSE)"
 
 
 # Install R packages
-RUN R -e "install.packages(c('BiocManager', 'dplyr', 'ggplot2', 'data.table', 'future', 'cowplot'))" 
+RUN R -e "install.packages(c('BiocManager', 'dplyr', 'ggplot2', 'data.table', 'future', 'cowplot', 'remotes'))" 
 RUN R -e "BiocManager::install('tidyverse')" 
+
+# Install Seurat
 RUN R -e "BiocManager::install('Seurat')"
 
-# Make R visible to jupyter
-RUN R -e "install.packages(\"IRkernel\")" \
-    R -e "IRkernel::installspec(user = FALSE)"
-
-RUN R -e "if (!requireNamespace('remotes', quietly = TRUE))" \
-    R -e "install.packages('remotes')" \
-    R -e "remotes::install_github('stuart-lab/signac', ref = 'develop')"
+# Install Signac
+RUN R -e "remotes::install_github('stuart-lab/signac', ref = 'develop')"
 
 # Install custom R packages
 # RUN R -e "remotes::install_github('Maiolino-Au/')"
