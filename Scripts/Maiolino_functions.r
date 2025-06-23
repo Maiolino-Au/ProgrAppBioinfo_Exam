@@ -56,6 +56,7 @@ atac_summary <- s3.summarize.data(data = dt_atac)
 
 
 # Step 4 ___________________________________________________________________________
+# Step 4 ___________________________________________________________________________
 s4.create.GenomicRanges <- function(
     type,
     path_f = "/sharedFolder/Data/matrix/features.tsv.gz"
@@ -92,9 +93,15 @@ s4.create.GenomicRanges <- function(
             start = features$start,
             end = features$end
         ),
-        peack_id = features$id,
         sum = summary
     )
+
+    if (type == "Genes") {
+        gr$gene_id <- features_genes$id
+        gr$gene_name <- features_genes$name
+    } else if (type == "Peaks") {
+        gr$peak_id <- features_atac$id
+    }
 
     return(gr)
 }
