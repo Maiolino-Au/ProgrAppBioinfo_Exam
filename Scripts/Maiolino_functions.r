@@ -27,6 +27,7 @@ s1.make.dt <- function(
 
 dt <- s1.make.dt(data_path = "/sharedFolder/Data/matrix/")
 
+
 # Step 2 ___________________________________________________________________________
 s2.subset.dt <- function(
     string,
@@ -54,8 +55,6 @@ genes_summary <- s3.summarize.data(data = dt_genes)
 atac_summary <- s3.summarize.data(data = dt_atac)
 
 
-
-# Step 4 ___________________________________________________________________________
 # Step 4 ___________________________________________________________________________
 s4.create.GenomicRanges <- function(
     type,
