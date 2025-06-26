@@ -41,7 +41,7 @@ unmerged_peaks <- s7.summary.table.peaks()
 
 genes_no_atac <- s7.summary.table.genes()
 
-plot_s7_pea <- s7.summary.plot.peaks()
+plot_s7_peak <- s7.summary.plot.peaks()
 
 plot_s7_genes <- s7.summary.plot.genes()
 
