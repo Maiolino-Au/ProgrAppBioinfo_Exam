@@ -1,9 +1,0 @@
-to add R
-  R.utils
-  DT
-  dplyr (pipe)
-  rtracklayer (import of h38)
-
-
-in linux
-  git
