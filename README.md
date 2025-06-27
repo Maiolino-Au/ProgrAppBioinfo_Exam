@@ -10,4 +10,4 @@ The docker image can be obtained from
 docker pull maiolinoaurelio/pab_exam2025
 ```
 
-[This](Maiolino_Au.pdf) is the report which 
+[This](Maiolino_Au.pdf) is the Rmarkdown report.
