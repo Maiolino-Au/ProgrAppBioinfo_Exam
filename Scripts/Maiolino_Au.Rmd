@@ -175,7 +175,8 @@ Create the Scripts folder and download the scripts from GitHub (for visualizatio
 ```dockerfile
 RUN mkdir -p /0_Scripts && \
   cd /0_Scripts && \
-  curl -O https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/Scripts/ Script_PAB_exam_Maiolino.R 
+  curl -O https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/Scripts/ Script_PAB_exam_Maiolino.R && \
+  curl -O https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/Scripts/ Maiolino_Au.Rmd
 ```
 
 Set the default shell as `/bin/bash`.
@@ -733,5 +734,5 @@ s8.save.plots()
 At last, this report was created using rmarkdown.
 
 ```{r, eval=FALSE}
-rmarkdown::render("Maiolino_Au.Rmd")
+rmarkdown::render("Maiolino_Au.Rmd", output_dir = "/sharedFolder/Results")
 ```
