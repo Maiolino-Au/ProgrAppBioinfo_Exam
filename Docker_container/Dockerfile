@@ -33,7 +33,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libbz2-dev \
     liblzma-dev \
     libncurses5-dev \
-    && rm -rf /var/lib/apt/lists/*
+    pandoc \
+    git
+
+# Cleaning step
+RUN rm -rf /var/lib/apt/lists/*
 
 
 
@@ -48,19 +52,23 @@ RUN apt update && apt install -y --no-install-recommends r-base
 
 # Install JupyterLab
 RUN apt update && apt install -y python3 python3-pip python3-venv
-# METTI il cazzo di &&
+
+# create a virtual environment in which JupyterLab can be installed
 RUN python3 -m venv /opt/venv
+
 # Activate virtual environment and install JupyterLab
 RUN /opt/venv/bin/pip install --upgrade pip && /opt/venv/bin/pip install jupyterlab
+
 # Set the virtual environment as the default Python path
 ENV PATH="/opt/venv/bin:$PATH"
+
 # Make R visible to jupyter
 RUN R -e "install.packages('IRkernel')" \
     R -e "IRkernel::installspec(user = FALSE)"
 
 
 # Install R packages
-RUN R -e "install.packages(c('BiocManager', 'dplyr', 'ggplot2', 'data.table', 'future', 'cowplot', 'remotes'))" 
+RUN R -e "install.packages(c('BiocManager', 'dplyr', 'ggplot2', 'data.table', 'future', 'cowplot', 'remotes', 'R.utils', 'dplyr', 'rtracklayer', 'tinytex'))" 
 RUN R -e "BiocManager::install('tidyverse')" 
 
 # Install Seurat
@@ -70,12 +78,13 @@ RUN R -e "BiocManager::install('Seurat')"
 RUN R -e "remotes::install_github('stuart-lab/signac', ref = 'develop')"
 
 # Install custom R packages
-# RUN R -e "remotes::install_github('Maiolino-Au/')"
+RUN R -e "remotes::install_github('Maiolino-Au/PABMaiolinoPackage')"
 
 # Download the R script from GitHub
-#RUN mkdir -p /Scripts && \
-#    cd /Scripts && \
-#    curl -O https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/Scripts/First.R 
+RUN mkdir -p /0_Scripts && \
+  cd /0_Scripts && \
+  curl -O https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/Scripts/Script_PAB_exam_Maiolino.R && \
+  curl -O https://raw.githubusercontent.com/Maiolino-Au/ProgrAppBioinfo_Exam/main/Scripts/Maiolino_Au.Rmd
 
 # 
 ENV SHELL=/bin/bash
