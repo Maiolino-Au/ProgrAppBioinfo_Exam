@@ -49,3 +49,7 @@ chr_wise_summary <- s7.summary.chr.wise()
 
 # Step 8: Visualization
 s8.save.plots()
+
+
+# Report
+rmarkdown::render("Maiolino_Au.Rmd", output_dir = "/sharedFolder/Results")
